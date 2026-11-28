@@ -41,7 +41,7 @@ struct Plate<Content: View, Foot: View>: View {
     private var page: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(title)
-                .font(.system(size: 22, weight: .semibold))
+                .font(.system(size: 22, weight: .semibold, design: .rounded))
                 .foregroundStyle(Palette.ink)
                 .padding(.top, 44)
                 .padding(.bottom, 20)
@@ -65,7 +65,7 @@ struct Plate<Content: View, Foot: View>: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: 10) {
                 Text(title)
-                    .font(.system(size: 17, weight: .semibold))
+                    .font(.system(size: 17, weight: .semibold, design: .rounded))
                     .foregroundStyle(Palette.ink)
                 Spacer(minLength: 0)
                 Door(icon: "xmark", help: "Done   esc", act: close)

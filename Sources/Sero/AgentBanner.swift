@@ -96,7 +96,7 @@ private struct AgentStatusFace: View {
     /// Working: the accent colour; quiet, muted.
     private var mark: some View {
         Image(systemName: "cursorarrow.rays")
-            .foregroundStyle(session.busy ? Color.accentColor : Palette.muted)
+            .foregroundStyle(session.busy ? Palette.accent : Palette.muted)
     }
 
     private var stop: some View {
@@ -196,7 +196,7 @@ struct AgentMark: View {
     var body: some View {
         if tab.agentWorking {
             Circle()
-                .fill(Color.accentColor)
+                .fill(Palette.accent)
                 .frame(width: 6, height: 6)
                 .padding(1.5)
                 .background(Circle().fill(Palette.ground))

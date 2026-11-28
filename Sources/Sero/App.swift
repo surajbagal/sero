@@ -66,6 +66,8 @@ struct SeroApp: App {
         Window("Sero", id: Browsers.sceneID) {
             SceneRoot(slot: SceneSlot.shared)
                 .frame(minWidth: 640, minHeight: 420)
+                // Sero's colour for the system's own controls in the window.
+                .tint(Palette.accent)
         }
         .windowStyle(.hiddenTitleBar)
         .defaultSize(width: 1180, height: 780)

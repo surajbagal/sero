@@ -177,7 +177,7 @@ struct ThemesPage: View {
                     .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).strokeBorder(Palette.hairline, lineWidth: 1))
                     .padding(3)
                     .overlay(RoundedRectangle(cornerRadius: 13, style: .continuous)
-                        .strokeBorder(on ? Color.accentColor : .clear, lineWidth: 2.5))
+                        .strokeBorder(on ? Palette.accent : .clear, lineWidth: 2.5))
                 Text(title)
                     .font(.system(size: 11.5, weight: on ? .medium : .regular))
                     .foregroundStyle(on ? Palette.ink : Palette.muted)

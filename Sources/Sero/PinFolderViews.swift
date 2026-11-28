@@ -253,7 +253,7 @@ enum PinFolderMenu {
 struct PinFolderMark: View {
     var body: some View {
         Capsule()
-            .fill(Color.accentColor)
+            .fill(Palette.accent)
             .frame(height: 2)
             .padding(.horizontal, 6)
             .allowsHitTesting(false)

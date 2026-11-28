@@ -89,7 +89,7 @@ struct WelcomePanel: View {
             Plate(size: 72)
             VStack(spacing: 10) {
                 Text("Sero")
-                    .font(.system(size: 34, weight: .medium))
+                    .font(.system(size: 34, weight: .semibold, design: .rounded))
                     .foregroundStyle(Palette.ink)
                 Text("A browser with nothing in the way. Four megabytes, the engine already in your Mac, and as little around the page as we could manage.")
                     .font(.system(size: 14.5))
@@ -411,7 +411,7 @@ struct WelcomePanel: View {
         let size: CGFloat
         var body: some View {
             Logomark()
-                .fill(Palette.ink, style: FillStyle(eoFill: true))
+                .fill(Palette.accentRun, style: FillStyle(eoFill: true))
                 .aspectRatio(Logomark.canvas.width / Logomark.canvas.height, contentMode: .fit)
                 .frame(height: size * 0.78)  // Sero: a round mark, so taller than the old wide one
         }
@@ -433,10 +433,11 @@ struct WelcomePanel: View {
             Button(action: act) {
                 Text(title)
                     .font(.system(size: 13, weight: .medium))
-                    .foregroundStyle(filled ? Palette.ground : Palette.ink)
+                    .foregroundStyle(filled ? Color.white : Palette.ink)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 9)
-                    .background(filled ? Palette.ink : (hovering ? Palette.hover : Palette.wash), in: Capsule())
+                    .background(filled ? AnyShapeStyle(Palette.accentRun)
+                                       : AnyShapeStyle(hovering ? Palette.hover : Palette.wash), in: Capsule())
                     .contentShape(Capsule())
             }
             .buttonStyle(.plain)

@@ -326,6 +326,11 @@ final class Preferences: ObservableObject {
     @Published var addressLine: Bool {
         didSet { store.set(addressLine, forKey: "address.shown") }
     }
+    /// Sero's aurora gradient behind the tabs and around the page, for a
+    /// space without a colour of its own. On unless turned off.
+    @Published var aurora: Bool {
+        didSet { store.set(aurora, forKey: "look.aurora") }
+    }
     /// Sero: the address bar across the top, over the page, with the tabs
     /// down the side (TopBar.swift). Off until turned on.
     @Published var topBar: Bool {
@@ -1398,6 +1403,7 @@ final class Preferences: ObservableObject {
         cardsInFullScreen = store.bool(forKey: "layout.cardsFullScreen")
         addressLine = store.bool(forKey: "address.shown")
         topBar = store.bool(forKey: "address.top")
+        aurora = store.object(forKey: "look.aurora") as? Bool ?? true
         let fades = store.bool(forKey: "scrollbars.fade")
         scrollbarsFade = fades
         Scrollbars.fade = fades

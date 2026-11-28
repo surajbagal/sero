@@ -635,6 +635,7 @@ struct SettingsPanel: View {
         case "layout.cardsFullScreen": Switch(on: $prefs.cardsInFullScreen)
         case "address.shown": Switch(on: $prefs.addressLine)
         case "address.top": Switch(on: $prefs.topBar)
+        case "look.aurora": Switch(on: $prefs.aurora)
         case "scrollbars.fade": Switch(on: $prefs.scrollbarsFade)
         case "address.width": Segmented(options: AddressWidth.allCases.map { ($0, $0.title) }, selection: $prefs.addressWidth)
         case "window.glass": Switch(on: $prefs.glass)
@@ -1192,12 +1193,12 @@ struct SettingsPanel: View {
     private var aboutHeader: some View {
         HStack(spacing: 14) {
             Logomark()
-                .fill(Palette.ink, style: FillStyle(eoFill: true))
+                .fill(Palette.accentRun, style: FillStyle(eoFill: true))
                 .aspectRatio(Logomark.canvas.width / Logomark.canvas.height, contentMode: .fit)
                 .frame(height: 34)
             VStack(alignment: .leading, spacing: 3) {
                 Text("Sero")
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(.system(size: 16, weight: .semibold, design: .rounded))
                     .foregroundStyle(Palette.ink)
                 Text("by Suraj Bagal · version \(Updater.version)")
                     .font(.system(size: 12))
@@ -1639,8 +1640,9 @@ struct Switch: View {
     @Binding var on: Bool
 
     var body: some View {
+        // On wears Sero's colour, violet into blue.
         Capsule()
-            .fill(on ? Palette.ink : Palette.faint)
+            .fill(on ? AnyShapeStyle(Palette.accentRun) : AnyShapeStyle(Palette.faint))
             .frame(width: 30, height: 18)
             .overlay(alignment: on ? .trailing : .leading) {
                 Circle()
@@ -1732,10 +1734,13 @@ struct Pill: View {
         Button(action: action) {
             Text(title)
                 .font(.system(size: 11.5))
-                .foregroundStyle(filled ? Palette.ground : tint)
+                .foregroundStyle(filled ? Color.white : tint)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
-                .background(filled ? Palette.ink : (hovering ? Palette.hover : Palette.ground), in: Capsule())
+                // The main button wears Sero's colour.
+                .background(filled ? AnyShapeStyle(Palette.accentRun)
+                                   : AnyShapeStyle(hovering ? Palette.hover : Palette.ground), in: Capsule())
+                .brightness(filled && hovering ? 0.06 : 0)
                 .overlay(Capsule().strokeBorder(filled ? .clear : Palette.hairline, lineWidth: 1))
                 .contentShape(Capsule())
         }

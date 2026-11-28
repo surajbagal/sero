@@ -223,7 +223,11 @@ final class SpaceGradientTests: XCTestCase {
         let browser = Browser(record: WindowRecord())
         let oldUsesSpaces = browser.prefs.usesSpaces
         let oldSpaces = browser.spaces
+        // Sero aurora off: a space without a colour is plain, as these check.
+        let oldAurora = browser.prefs.aurora
+        browser.prefs.aurora = false
         defer {
+            browser.prefs.aurora = oldAurora
             browser.closeAll()
             browser.prefs.usesSpaces = oldUsesSpaces
             browser.spaces = oldSpaces
@@ -382,13 +386,47 @@ final class SpaceGradientTests: XCTestCase {
 
     // MARK: - the window
 
+    /// Sero aurora on: a space without a colour, and the window with spaces
+    /// off, wear the aurora at Rich; a space's own colour still wins.
+    func testWithoutAColourOfItsOwnTheWindowWearsTheAurora() {
+        _ = NSApplication.shared
+        NSApp.setActivationPolicy(.prohibited)
+        let browser = Browser(record: WindowRecord())
+        let oldUsesSpaces = browser.prefs.usesSpaces
+        let oldAurora = browser.prefs.aurora
+        let oldSpaces = browser.spaces
+        defer {
+            browser.prefs.aurora = oldAurora
+            browser.closeAll()
+            browser.prefs.usesSpaces = oldUsesSpaces
+            browser.spaces = oldSpaces
+        }
+        browser.prefs.aurora = true
+        browser.prefs.usesSpaces = false
+        XCTAssertEqual(browser.wash, .gradient(SpaceGradient.aurora), "spaces off: the aurora")
+        XCTAssertEqual(browser.washStrength, .rich)
+        browser.prefs.usesSpaces = true
+        browser.spaces[0].colour = 0
+        browser.spaces[0].gradient = nil
+        XCTAssertEqual(browser.wash, .gradient(SpaceGradient.aurora), "a space without a colour: the aurora")
+        browser.spaces[0].colour = 2
+        XCTAssertEqual(browser.wash, .colour(2), "a space's own colour wins")
+        browser.prefs.aurora = false
+        browser.spaces[0].colour = 0
+        XCTAssertNil(browser.wash, "Sero aurora off: plain")
+    }
+
     func testTheWashFollowsTheGradientAndFallsBackToTheColour() {
         _ = NSApplication.shared
         NSApp.setActivationPolicy(.prohibited)
         let browser = Browser(record: WindowRecord())
         let oldUsesSpaces = browser.prefs.usesSpaces
         let oldSpaces = browser.spaces
+        // Sero aurora off: a space without a colour is plain, as these check.
+        let oldAurora = browser.prefs.aurora
+        browser.prefs.aurora = false
         defer {
+            browser.prefs.aurora = oldAurora
             browser.closeAll()
             browser.prefs.usesSpaces = oldUsesSpaces
             browser.spaces = oldSpaces

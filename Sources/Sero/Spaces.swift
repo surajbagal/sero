@@ -420,12 +420,23 @@ extension Browser {
     /// screen's colour or gradient, so it follows a swipe, ⌃1–⌃9 and the
     /// profile shown. None with spaces off, and while a new one is being
     /// made, as the dot has.
+    /// Without one, Sero's aurora (Settings › Appearance › Sero aurora).
     var wash: SpaceLook? {
+        if let own = ownWash { return own }
+        return prefs.aurora ? .gradient(SpaceGradient.aurora) : nil
+    }
+
+    /// The space's own colour or gradient, when it has one and spaces are on.
+    private var ownWash: SpaceLook? {
         prefs.usesSpaces && !makingSpace ? washSpace.look : nil
     }
 
-    /// How strongly the wash is drawn: the space on screen's strength.
-    var washStrength: SpaceStrength { wash == nil ? .subtle : washSpace.washStrength }
+    /// How strongly the wash is drawn: the space on screen's strength, or
+    /// Rich for the aurora, so it is seen.
+    var washStrength: SpaceStrength {
+        if ownWash != nil { return washSpace.washStrength }
+        return prefs.aurora ? .rich : .subtle
+    }
 
     /// The space the wash is of: the one a click is taking you to, already,
     /// or the one on screen. Waiting for the switch itself, the old colour

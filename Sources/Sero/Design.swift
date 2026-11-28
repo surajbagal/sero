@@ -23,6 +23,13 @@ enum Palette {
     static let frame = Color(nsColor: NS.frame)
     /// The only two that aren't grey: a connection nobody can read on the
     /// way, and one anybody can (see SiteCard.swift).
+    /// Sero's own colour, the violet of its icon: switches that are on, the
+    /// main button, the field being typed in, the line of a page loading.
+    static let accent = Color(nsColor: NS.accent)
+    /// The accent as a run of colour, violet into blue, for what is on and
+    /// the main button (Soft aurora, see SpaceGradient.aurora).
+    static let accentRun = LinearGradient(colors: [Color(nsColor: NS.accent), Color(nsColor: NS.accentEnd)],
+                                          startPoint: .leading, endPoint: .trailing)
     static let safe = Color(nsColor: NS.safe)           // green-700 · green-400
     static let unsafe = Color(nsColor: NS.unsafe)       // amber-700 · amber-400
 
@@ -39,6 +46,8 @@ enum Palette {
         static let frame = pair(0.955, 0.075)
         /// The resting traffic lights, drawn by hand when the app is behind.
         static let resting = pair(0.80, 0.30)
+        static let accent = tint(light: (0.29, 0.25, 0.93), dark: (0.48, 0.45, 1.0))
+        static let accentEnd = tint(light: (0.23, 0.51, 0.96), dark: (0.38, 0.62, 1.0))
         static let safe = tint(light: (0.08, 0.50, 0.24), dark: (0.29, 0.87, 0.50))
         static let unsafe = tint(light: (0.71, 0.33, 0.04), dark: (0.98, 0.75, 0.14))
 
@@ -169,7 +178,7 @@ enum Metrics {
     /// window's edges (and from the column, folded away), and its corners
     /// this round.
     static let cardGap: CGFloat = 8
-    static let cardRadius: CGFloat = 10
+    static let cardRadius: CGFloat = 14
     /// Where the first tab starts. The traffic lights run from 19 to 79 —
     /// measured, not guessed — so this leaves them the same air on their right
     /// that the window gives them on their left.

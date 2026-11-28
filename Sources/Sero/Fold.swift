@@ -1153,7 +1153,8 @@ struct LoadingLine: NSViewRepresentable {
         override init(frame: NSRect) {
             super.init(frame: frame)
             wantsLayer = true
-            line.backgroundColor = NSColor.controlAccentColor.cgColor
+            // Sero's own colour, not the Mac's accent.
+            line.backgroundColor = Palette.NS.accent.cgColor
             line.opacity = 0
             line.anchorPoint = .zero
             layer?.addSublayer(line)

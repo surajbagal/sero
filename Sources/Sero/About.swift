@@ -54,7 +54,7 @@ struct AboutView: View {
                 .frame(width: 72, height: 72)
                 .padding(.bottom, 10)
             Text(verbatim: "Sero")
-                .font(.system(size: 15, weight: .semibold))
+                .font(.system(size: 17, weight: .semibold, design: .rounded))
                 .foregroundStyle(Palette.ink)
             Text(verbatim: AboutView.versionLine)
                 .font(.system(size: 11))

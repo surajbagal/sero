@@ -116,7 +116,13 @@ struct SpaceGradient: Codable, Equatable, Hashable {
 
     private static func swatch(_ name: String) -> String { swatches.first { $0.name == name }?.hex ?? "#808080" }
 
+    /// Sero's own look, Soft aurora: violet into blue into lilac, for every
+    /// space that hasn't chosen a colour of its own (Settings › Appearance ›
+    /// Sero aurora, see Browser.wash).
+    static let aurora = SpaceGradient(colours: ["#6A5CFF", "#3B82F6", "#C084FC"], angle: 160)
+
     static let presets: [(name: String, gradient: SpaceGradient)] = [
+        ("Aurora", aurora),
         ("Sunrise", SpaceGradient(colours: [swatch("Amber"), swatch("Pink")])),
         ("Lagoon", SpaceGradient(colours: [swatch("Teal"), swatch("Blue")])),
         ("Orchard", SpaceGradient(colours: [swatch("Lime"), swatch("Teal")])),

@@ -802,7 +802,7 @@ private struct SERPPane: View {
                         Text(result.domain).font(.caption).foregroundStyle(.secondary)
                     }
                 }
-                .listRowBackground(SERP.matches(result.url, model.domain) ? Color.accentColor.opacity(0.15) : Color.clear)
+                .listRowBackground(SERP.matches(result.url, model.domain) ? Palette.accent.opacity(0.15) : Color.clear)
             }
             .listStyle(.plain)
             Text("Keep the place out of the search words: Google uses a place you type (\"…in Lohegaon\") over the one picked here. It may still use your network's location.")

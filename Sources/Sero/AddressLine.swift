@@ -102,6 +102,13 @@ struct AddressLine: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: height)
             .background(greys.hover, in: RoundedRectangle(cornerRadius: 9, style: .continuous))
+            // Sero's colour around the field while it is typed in.
+            .overlay {
+                if browser.editingInline {
+                    RoundedRectangle(cornerRadius: 9, style: .continuous)
+                        .strokeBorder(Palette.accentRun, lineWidth: 1.5)
+                }
+            }
             .background(ViewAnchor(box: line))
             .contentShape(Rectangle())
             .onTapGesture { if !browser.editing { browser.edit(); browser.inlineEdit = true } }
